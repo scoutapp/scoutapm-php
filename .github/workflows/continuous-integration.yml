@@ -693,7 +693,6 @@ jobs:
           - "8.*"
           - "9.*"
           - "10.*"
-          - "11.*"
         php-version:
           - "7.2"
           - "7.3"
@@ -733,12 +732,6 @@ jobs:
           - {lumen-version: "10.*", php-version: "7.3"} # Lumen 10 requires 8.1+
           - {lumen-version: "10.*", php-version: "7.4"} # Lumen 10 requires 8.1+
           - {lumen-version: "10.*", php-version: "8.0"} # Lumen 10 requires 8.1+
-          # Lumen 11 supports PHP 8.2 - 8.3
-          - {lumen-version: "11.*", php-version: "7.2"} # Lumen 11 requires 8.2+
-          - {lumen-version: "11.*", php-version: "7.3"} # Lumen 11 requires 8.2+
-          - {lumen-version: "11.*", php-version: "7.4"} # Lumen 11 requires 8.2+
-          - {lumen-version: "11.*", php-version: "8.0"} # Lumen 11 requires 8.2+
-          - {lumen-version: "11.*", php-version: "8.1"} # Lumen 11 requires 8.2+
     steps:
       - uses: actions/checkout@v3
       - name: "Install PHP"
@@ -781,7 +774,6 @@ jobs:
           - "8.*"
           - "9.*"
           - "10.*"
-          - "11.*"
         php-version:
           - "7.2"
           - "7.3"
@@ -821,12 +813,6 @@ jobs:
           - {lumen-version: "10.*", php-version: "7.3"} # Lumen 10 requires 8.1+
           - {lumen-version: "10.*", php-version: "7.4"} # Lumen 10 requires 8.1+
           - {lumen-version: "10.*", php-version: "8.0"} # Lumen 10 requires 8.1+
-          # Lumen 11 supports PHP 8.2 - 8.3
-          - {lumen-version: "11.*", php-version: "7.2"} # Lumen 11 requires 8.2+
-          - {lumen-version: "11.*", php-version: "7.3"} # Lumen 11 requires 8.2+
-          - {lumen-version: "11.*", php-version: "7.4"} # Lumen 11 requires 8.2+
-          - {lumen-version: "11.*", php-version: "8.0"} # Lumen 11 requires 8.2+
-          - {lumen-version: "11.*", php-version: "8.1"} # Lumen 11 requires 8.2+
     env:
       SCOUT_APM_KEY: ${{ secrets.SCOUT_APM_KEY }}
     steps:
