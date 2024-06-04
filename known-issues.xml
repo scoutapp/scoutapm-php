@@ -1,388 +1,612 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.24.0@06dd975cb55d36af80f242561738f16c5f58264f">
+<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
   <file src="src/Agent.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>! is_array($disabledInstruments)</code>
+    <DocblockTypeContradiction>
+      <code><![CDATA[! is_array($disabledInstruments)]]></code>
+      <code><![CDATA[$disabledInstruments === null
+            || ! is_array($disabledInstruments)]]></code>
     </DocblockTypeContradiction>
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$configuration-&gt;get(ConfigKey::IGNORED_ENDPOINTS)</code>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$configuration->get(ConfigKey::IGNORED_ENDPOINTS)]]></code>
     </MixedArgumentTypeCoercion>
-    <PossiblyNullArgument occurrences="2">
-      <code>$configuration-&gt;get(ConfigKey::IGNORED_ENDPOINTS)</code>
-      <code>$this-&gt;config-&gt;get(ConfigKey::APPLICATION_NAME)</code>
+    <PossiblyNullArgument>
+      <code><![CDATA[$configuration->get(ConfigKey::IGNORED_ENDPOINTS)]]></code>
+      <code><![CDATA[$this->config->get(ConfigKey::APPLICATION_NAME)]]></code>
     </PossiblyNullArgument>
-    <RedundantCastGivenDocblockType occurrences="2">
-      <code>(string) $config-&gt;get(ConfigKey::LOG_LEVEL)</code>
-      <code>(string) $this-&gt;config-&gt;get(ConfigKey::API_VERSION)</code>
+    <RedundantCastGivenDocblockType>
+      <code><![CDATA[(string) $config->get(ConfigKey::LOG_LEVEL)]]></code>
+      <code><![CDATA[(string) $this->config->get(ConfigKey::API_VERSION)]]></code>
     </RedundantCastGivenDocblockType>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$recordedCall->maybeHttpMethod()]]></code>
+      <code><![CDATA[$this->ignoreReason]]></code>
+      <code><![CDATA[$this->request->controllerOrJobName()]]></code>
+    </RiskyTruthyFalsyComparison>
+    <UnusedDocblockParam>
+      <code><![CDATA[$defaultReturn]]></code>
+    </UnusedDocblockParam>
   </file>
   <file src="src/Config.php">
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$key</code>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="3">
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
+    <MixedAssignment>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="1"/>
-    <MixedReturnStatement occurrences="1">
-      <code>$value ?? null</code>
+    <MixedInferredReturnType>
+      <code><![CDATA[(
+     *   K is ConfigKey::MONITORING_ENABLED|ConfigKey::LOG_PAYLOAD_CONTENT|ConfigKey::ERRORS_ENABLED|ConfigKey::CORE_AGENT_DOWNLOAD_ENABLED|ConfigKey::CORE_AGENT_LAUNCH_ENABLED ? bool
+     *   : K is ConfigKey::IGNORED_ENDPOINTS|ConfigKey::IGNORED_JOBS|ConfigKey::DISABLED_INSTRUMENTS|ConfigKey::URI_FILTERED_PARAMETERS|ConfigKey::ERRORS_IGNORED_EXCEPTIONS|ConfigKey::ERRORS_FILTERED_PARAMETERS ? array|null
+     *   : K is ConfigKey::CORE_AGENT_PERMISSIONS|ConfigKey::ERRORS_BATCH_SIZE ? int
+     *   : K is ConfigKey::API_VERSION|ConfigKey::CORE_AGENT_DIRECTORY|ConfigKey::CORE_AGENT_VERSION|ConfigKey::CORE_AGENT_DOWNLOAD_URL|ConfigKey::LOG_LEVEL|ConfigKey::ERRORS_HOST|ConfigKey::URI_REPORTING|ConfigKey::CORE_AGENT_SOCKET_PATH|ConfigKey::CORE_AGENT_FULL_NAME|ConfigKey::CORE_AGENT_TRIPLE ? string
+     *   : string|null
+     * )]]></code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$value ?? null]]></code>
+      <code><![CDATA[$value ?? null]]></code>
     </MixedReturnStatement>
   </file>
   <file src="src/Config/IgnoredEndpoints.php">
-    <MixedAssignment occurrences="1">
-      <code>$ignore</code>
+    <MixedArgument>
+      <code><![CDATA[$ignore]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$ignore]]></code>
     </MixedAssignment>
   </file>
   <file src="src/Connector/SocketConnector.php">
-    <MixedArgument occurrences="1">
-      <code>$this-&gt;connectionAddress</code>
+    <MixedArgument>
+      <code><![CDATA[$this->connectionAddress]]></code>
     </MixedArgument>
-    <MixedPropertyAssignment occurrences="1">
-      <code>$this</code>
+    <MixedPropertyAssignment>
+      <code><![CDATA[$this]]></code>
     </MixedPropertyAssignment>
-    <MixedPropertyFetch occurrences="1">
-      <code>$this-&gt;connectionAddress</code>
+    <MixedPropertyFetch>
+      <code><![CDATA[$this->connectionAddress]]></code>
     </MixedPropertyFetch>
-    <UnusedClosureParam occurrences="1">
-      <code>$context</code>
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[string]]></code>
+    </PossiblyUnusedReturnValue>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! $serializedJsonString]]></code>
+    </RiskyTruthyFalsyComparison>
+    <UnusedClosureParam>
+      <code><![CDATA[$context]]></code>
     </UnusedClosureParam>
-    <UnusedFunctionCall occurrences="1">
-      <code>socket_shutdown</code>
-    </UnusedFunctionCall>
+  </file>
+  <file src="src/CoreAgent/AutomaticDownloadAndLaunchManager.php">
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[bool]]></code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/CoreAgent/Launcher.php">
+    <MissingClosureParamType>
+      <code><![CDATA[$item]]></code>
+    </MissingClosureParamType>
+  </file>
+  <file src="src/CoreAgent/Manager.php">
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[bool]]></code>
+    </PossiblyUnusedReturnValue>
   </file>
   <file src="src/CoreAgent/Manifest.php">
-    <MixedArrayAccess occurrences="3">
-      <code>$json['core_agent_binary']</code>
-      <code>$json['core_agent_binary_sha256']</code>
-      <code>$json['core_agent_version']</code>
+    <MixedArrayAccess>
+      <code><![CDATA[$json['core_agent_binary']]]></code>
+      <code><![CDATA[$json['core_agent_binary_sha256']]]></code>
+      <code><![CDATA[$json['core_agent_version']]]></code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="4">
-      <code>$json</code>
-      <code>$this-&gt;binName</code>
-      <code>$this-&gt;binVersion</code>
-      <code>$this-&gt;sha256</code>
+    <MixedAssignment>
+      <code><![CDATA[$json]]></code>
+      <code><![CDATA[$this->binName]]></code>
+      <code><![CDATA[$this->binVersion]]></code>
+      <code><![CDATA[$this->sha256]]></code>
     </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[binaryVersion]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Errors/ErrorEvent.php">
+    <RedundantCondition>
+      <code><![CDATA[$builtUrl !== '']]></code>
+    </RedundantCondition>
   </file>
   <file src="src/Errors/ErrorHandlingDiscoveryFactory.php">
-    <RedundantCastGivenDocblockType occurrences="1">
-      <code>(bool) $config-&gt;get(Config\ConfigKey::ERRORS_ENABLED)</code>
+    <RedundantCastGivenDocblockType>
+      <code><![CDATA[(bool) $config->get(Config\ConfigKey::ERRORS_ENABLED)]]></code>
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Errors/ScoutClient/HttpErrorReportingClient.php">
-    <RedundantCastGivenDocblockType occurrences="1">
-      <code>(string) $this-&gt;config-&gt;get(ConfigKey::ERRORS_HOST)</code>
+    <RedundantCastGivenDocblockType>
+      <code><![CDATA[(string) $this->config->get(ConfigKey::ERRORS_HOST)]]></code>
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Errors/ScoutErrorHandling.php">
-    <RedundantCastGivenDocblockType occurrences="1">
-      <code>(bool) $this-&gt;config-&gt;get(Config\ConfigKey::ERRORS_ENABLED)</code>
+    <RedundantCastGivenDocblockType>
+      <code><![CDATA[(bool) $this->config->get(Config\ConfigKey::ERRORS_ENABLED)]]></code>
     </RedundantCastGivenDocblockType>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! $this->oldExceptionHandler]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Events/Request/Request.php">
-    <MixedAssignment occurrences="2">
-      <code>$commands[]</code>
-      <code>$value</code>
+    <MixedAssignment>
+      <code><![CDATA[$commands[]]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
-  </file>
-  <file src="src/Events/Span/Span.php">
-    <MixedAssignment occurrences="2">
-      <code>$commands[]</code>
-      <code>$value</code>
-    </MixedAssignment>
-    <MixedReturnTypeCoercion occurrences="2">
-      <code>$commands</code>
-      <code>array&lt;int, array&lt;string, (string|array|bool|null)&gt;&gt;</code>
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[[
+            'BatchCommand' => ['commands' => $commands],
+        ]]]></code>
+      <code><![CDATA[array{
+     *      BatchCommand: array{
+     *          commands: list<
+     *              array{
+     *                  StartRequest: array{
+     *                      request_id: string,
+     *                      timestamp: string|null,
+     *                  }
+     *              }|array{
+     *                  FinishRequest: array{
+     *                      request_id: string,
+     *                      timestamp: string|null,
+     *                  }
+     *              }
+     *          >
+     *      }
+     * }]]></code>
     </MixedReturnTypeCoercion>
   </file>
+  <file src="src/Events/Span/Span.php">
+    <MixedAssignment>
+      <code><![CDATA[$commands[]]]></code>
+      <code><![CDATA[$value]]></code>
+    </MixedAssignment>
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$commands]]></code>
+      <code><![CDATA[array<int, array<string, (string|array|bool|null)>>]]></code>
+    </MixedReturnTypeCoercion>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[id]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Events/Span/SpanReference.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[duration]]></code>
+      <code><![CDATA[getStartTime]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Events/Tag/Tag.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>string</code>
+    <MixedInferredReturnType>
+      <code><![CDATA[string]]></code>
     </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
-      <code>$this-&gt;value</code>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->value]]></code>
     </MixedReturnStatement>
   </file>
   <file src="src/Helper/Backtrace.php">
-    <MixedArgument occurrences="1">
-      <code>$composerContent['config']</code>
+    <MixedArgument>
+      <code><![CDATA[$composerContent['config']]]></code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$composerContent</code>
+    <MixedAssignment>
+      <code><![CDATA[$composerContent]]></code>
     </MixedAssignment>
+  </file>
+  <file src="src/Helper/FilterParameters.php">
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[static function (string $key) use ($lowercasedParameterKeysToBeFiltered): bool {
+                return ! in_array(strtolower($key), $lowercasedParameterKeysToBeFiltered, true);
+            }]]></code>
+    </MixedArgumentTypeCoercion>
+  </file>
+  <file src="src/Helper/LibcDetection.php">
+    <UnusedClass>
+      <code><![CDATA[LibcDetection]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Laravel/Console/Commands/CoreAgent.php">
+    <NonInvariantDocblockPropertyType>
+      <code><![CDATA[$description]]></code>
+    </NonInvariantDocblockPropertyType>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[handle]]></code>
+    </PossiblyUnusedMethod>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! $shouldDownload]]></code>
+      <code><![CDATA[! $shouldLaunch]]></code>
+      <code><![CDATA[! $shouldLaunch]]></code>
+      <code><![CDATA[$shouldDownload]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Laravel/Providers/ScoutApmServiceProvider.php">
-    <InvalidArgument occurrences="1">
-      <code>$app-&gt;make(self::CACHE_SERVICE_KEY)</code>
+    <InvalidArgument>
+      <code><![CDATA[$app->make(self::CACHE_SERVICE_KEY)]]></code>
     </InvalidArgument>
   </file>
+  <file src="src/Laravel/View/Engine/ScoutViewEngineDecorator.php">
+    <PossiblyNullFunctionCall>
+      <code><![CDATA[Closure::bind(
+            function & () {
+                return $this->lastCompiled;
+            },
+            $engine,
+            $engine
+        )->__invoke()]]></code>
+    </PossiblyNullFunctionCall>
+    <PossiblyNullReference>
+      <code><![CDATA[__invoke]]></code>
+    </PossiblyNullReference>
+    <UnsupportedReferenceUsage>
+      <code><![CDATA[$this->lastCompiled = & Closure::bind(
+            function & () {
+                return $this->lastCompiled;
+            },
+            $engine,
+            $engine
+        )->__invoke()]]></code>
+    </UnsupportedReferenceUsage>
+  </file>
   <file src="src/Logger/FilteredLogLevelDecorator.php">
-    <MixedArrayOffset occurrences="1">
-      <code>self::LOG_LEVEL_ORDER[$level]</code>
+    <MixedArrayOffset>
+      <code><![CDATA[self::LOG_LEVEL_ORDER[$level]]]></code>
     </MixedArrayOffset>
   </file>
+  <file src="src/MongoDB/QueryTimeCollector.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[commandFailed]]></code>
+      <code><![CDATA[commandStarted]]></code>
+      <code><![CDATA[commandSucceeded]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[self]]></code>
+    </PossiblyUnusedReturnValue>
+  </file>
   <file src="src/ScoutApmBundle/DependencyInjection/Configuration.php">
-    <MixedAssignment occurrences="2">
-      <code>$children</code>
-      <code>$children</code>
+    <MixedAssignment>
+      <code><![CDATA[$children]]></code>
+      <code><![CDATA[$children]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>NodeDefinition|ArrayNodeDefinition</code>
+    <MixedInferredReturnType>
+      <code><![CDATA[NodeDefinition|ArrayNodeDefinition]]></code>
     </MixedInferredReturnType>
-    <MixedMethodCall occurrences="8">
-      <code>arrayNode</code>
-      <code>children</code>
-      <code>defaultNull</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>scalarNode</code>
+    <MixedMethodCall>
+      <code><![CDATA[arrayNode]]></code>
+      <code><![CDATA[children]]></code>
+      <code><![CDATA[defaultNull]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[scalarNode]]></code>
     </MixedMethodCall>
-    <MixedReturnStatement occurrences="1">
-      <code>$treeBuilder-&gt;root(self::ROOT_NODE_NAME)</code>
+    <MixedReturnStatement>
+      <code><![CDATA[$treeBuilder->root(self::ROOT_NODE_NAME)]]></code>
     </MixedReturnStatement>
+    <UndefinedMethod>
+      <code><![CDATA[children]]></code>
+    </UndefinedMethod>
   </file>
-  <file src="src/ScoutApmBundle/Twig/TwigDecorator.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>string</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1"/>
-  </file>
-  <file src="tests/Integration/AgentTest.php">
-    <DeprecatedMethod occurrences="2">
-      <code>getEvents</code>
-      <code>getRequest</code>
+  <file src="src/ScoutApmBundle/EventListener/DoctrineSqlLogger.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getSQLLogger]]></code>
+      <code><![CDATA[setSQLLogger]]></code>
+      <code><![CDATA[setSQLLogger]]></code>
     </DeprecatedMethod>
   </file>
-  <file src="tests/Integration/CheckScoutApmKeyListener.php">
-    <DeprecatedInterface occurrences="1">
-      <code>CheckScoutApmKeyListener</code>
-    </DeprecatedInterface>
-    <DeprecatedTrait occurrences="1">
-      <code>TestListenerDefaultImplementation</code>
-    </DeprecatedTrait>
-  </file>
-  <file src="tests/Integration/TestHelper.php">
-    <MixedAssignment occurrences="1">
-      <code>$expectedValue</code>
-    </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>?string</code>
+  <file src="src/ScoutApmBundle/Twig/TwigDecorator.php">
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$callable]]></code>
+    </MixedArgumentTypeCoercion>
+    <MixedInferredReturnType>
+      <code><![CDATA[string]]></code>
     </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
-      <code>$commandPayload[$identifierKeyToReturn]</code>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->instrument(
+            $this->nameOrConvertTemplateWrapperToString($name),
+            function () use ($name, $context) {
+                return $this->twig->render($name, $context);
+            }
+        )]]></code>
     </MixedReturnStatement>
   </file>
+  <file src="tests/Integration/AgentTest.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getEvents]]></code>
+      <code><![CDATA[getRequest]]></code>
+    </DeprecatedMethod>
+    <InvalidArgument>
+      <code><![CDATA[testLoggingIsSentUsingConfiguration]]></code>
+    </InvalidArgument>
+    <PossiblyNullPropertyFetch>
+      <code><![CDATA[$cursor->current()->hello]]></code>
+    </PossiblyNullPropertyFetch>
+  </file>
+  <file src="tests/Integration/CheckScoutApmKeyListener.php">
+    <DeprecatedInterface>
+      <code><![CDATA[CheckScoutApmKeyListener]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[TestListenerDefaultImplementation]]></code>
+    </DeprecatedTrait>
+    <UnusedClass>
+      <code><![CDATA[CheckScoutApmKeyListener]]></code>
+    </UnusedClass>
+  </file>
+  <file src="tests/Integration/TestHelper.php">
+    <MixedAssignment>
+      <code><![CDATA[$expectedValue]]></code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code><![CDATA[?string]]></code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$commandPayload[$identifierKeyToReturn]]]></code>
+    </MixedReturnStatement>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[assertValidMemoryUsage]]></code>
+      <code><![CDATA[assertValidTimestamp]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="tests/Unit/AgentTest.php">
-    <MixedArgument occurrences="5">
-      <code>$commands[(self::EXPECTED_SPAN_LIMIT * 2) + 1]</code>
-      <code>$commands[(self::EXPECTED_SPAN_LIMIT * 2) + 2]</code>
-      <code>$commands[(self::EXPECTED_SPAN_LIMIT * 2) + 3]</code>
-      <code>$commands[(self::EXPECTED_SPAN_LIMIT * 2) + 4]</code>
-      <code>$commands[0]</code>
+    <DeprecatedClass>
+      <code><![CDATA[self::at(0)]]></code>
+    </DeprecatedClass>
+    <DeprecatedMethod>
+      <code><![CDATA[self::at(0)]]></code>
+      <code><![CDATA[self::at(0)]]></code>
+      <code><![CDATA[self::at(1)]]></code>
+      <code><![CDATA[self::at(1)]]></code>
+      <code><![CDATA[self::at(1)]]></code>
+      <code><![CDATA[self::at(1)]]></code>
+      <code><![CDATA[self::at(1)]]></code>
+      <code><![CDATA[self::at(1)]]></code>
+      <code><![CDATA[self::at(2)]]></code>
+      <code><![CDATA[self::at(2)]]></code>
+      <code><![CDATA[self::at(2)]]></code>
+      <code><![CDATA[self::at(2)]]></code>
+      <code><![CDATA[self::at(2)]]></code>
+      <code><![CDATA[self::at(2)]]></code>
+      <code><![CDATA[self::at(2)]]></code>
+      <code><![CDATA[self::at(2)]]></code>
+      <code><![CDATA[self::at(3)]]></code>
+      <code><![CDATA[self::at(3)]]></code>
+      <code><![CDATA[self::at(3)]]></code>
+      <code><![CDATA[self::at(3)]]></code>
+      <code><![CDATA[self::at(3)]]></code>
+      <code><![CDATA[self::at(3)]]></code>
+      <code><![CDATA[self::at(3)]]></code>
+      <code><![CDATA[self::at(3)]]></code>
+      <code><![CDATA[self::at(4)]]></code>
+      <code><![CDATA[self::at(4)]]></code>
+      <code><![CDATA[self::at(4)]]></code>
+      <code><![CDATA[self::at(5)]]></code>
+      <code><![CDATA[self::at(5)]]></code>
+      <code><![CDATA[self::at(6)]]></code>
+    </DeprecatedMethod>
+    <MixedArgument>
+      <code><![CDATA[$commands[(self::EXPECTED_SPAN_LIMIT * 2) + 1]]]></code>
+      <code><![CDATA[$commands[(self::EXPECTED_SPAN_LIMIT * 2) + 2]]]></code>
+      <code><![CDATA[$commands[(self::EXPECTED_SPAN_LIMIT * 2) + 3]]]></code>
+      <code><![CDATA[$commands[(self::EXPECTED_SPAN_LIMIT * 2) + 4]]]></code>
+      <code><![CDATA[$commands[0]]]></code>
     </MixedArgument>
-    <MixedReturnTypeCoercion occurrences="2">
-      <code>$request-&gt;getEvents()</code>
-      <code>array&lt;int, Command&gt;</code>
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$request->getEvents()]]></code>
+      <code><![CDATA[array<int, Command>]]></code>
     </MixedReturnTypeCoercion>
   </file>
   <file src="tests/Unit/Config/Source/DerivedSourceTest.php">
-    <MixedArgument occurrences="2">
-      <code>$this-&gt;derivedSource-&gt;get(ConfigKey::CORE_AGENT_FULL_NAME)</code>
-      <code>$this-&gt;derivedSource-&gt;get(ConfigKey::CORE_AGENT_TRIPLE)</code>
+    <MixedArgument>
+      <code><![CDATA[$this->derivedSource->get(ConfigKey::CORE_AGENT_FULL_NAME)]]></code>
+      <code><![CDATA[$this->derivedSource->get(ConfigKey::CORE_AGENT_TRIPLE)]]></code>
     </MixedArgument>
+  </file>
+  <file src="tests/Unit/Connector/SocketConnectorTest.php">
+    <InvalidCast>
+      <code><![CDATA[exec($realpath . ' ' . $port . ' > /dev/null 2>&1 & echo $!')]]></code>
+    </InvalidCast>
   </file>
   <file src="tests/Unit/Events/MetadataTest.php">
-    <MixedArrayAccess occurrences="1"/>
+    <MixedArrayAccess>
+      <code><![CDATA[json_decode(json_encode(new Metadata(
+                $this->time,
+                $config,
+                $this->phpExtension,
+                $this->findApplicationRoot,
+                $this->determineHostname,
+                new FindRootPackageGitShaWithHerokuAndConfigOverride($config, $superglobals)
+            )), true)['ApplicationEvent']]]></code>
+    </MixedArrayAccess>
   </file>
   <file src="tests/Unit/Events/Request/RequestTest.php">
-    <MixedArrayAccess occurrences="29">
-      <code>$command['TagRequest']['tag']</code>
-      <code>$command['TagRequest']['value']</code>
-      <code>$tagRequest['tag']</code>
-      <code>$tagRequest['tag']</code>
-      <code>$tagRequest['tag']</code>
-      <code>$tagRequest['tag']</code>
-      <code>$tagRequest['tag']</code>
-      <code>$tagRequest['tag']</code>
-      <code>$tagRequest['tag']</code>
-      <code>$tagRequest['value']</code>
-      <code>$tagRequest['value']</code>
-      <code>$tagRequest['value']</code>
-      <code>$tagRequest['value']</code>
-      <code>$tagRequest['value']</code>
-      <code>$tagRequest['value']</code>
-      <code>$tagRequest['value']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
-      <code>json_decode(json_encode($request), true)['BatchCommand']</code>
+    <MixedArrayAccess>
+      <code><![CDATA[$command['TagRequest']['tag']]]></code>
+      <code><![CDATA[$command['TagRequest']['value']]]></code>
+      <code><![CDATA[$tagRequest['tag']]]></code>
+      <code><![CDATA[$tagRequest['tag']]]></code>
+      <code><![CDATA[$tagRequest['tag']]]></code>
+      <code><![CDATA[$tagRequest['tag']]]></code>
+      <code><![CDATA[$tagRequest['tag']]]></code>
+      <code><![CDATA[$tagRequest['tag']]]></code>
+      <code><![CDATA[$tagRequest['tag']]]></code>
+      <code><![CDATA[$tagRequest['value']]]></code>
+      <code><![CDATA[$tagRequest['value']]]></code>
+      <code><![CDATA[$tagRequest['value']]]></code>
+      <code><![CDATA[$tagRequest['value']]]></code>
+      <code><![CDATA[$tagRequest['value']]]></code>
+      <code><![CDATA[$tagRequest['value']]]></code>
+      <code><![CDATA[$tagRequest['value']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
+      <code><![CDATA[json_decode(json_encode($request), true)['BatchCommand']]]></code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="8">
-      <code>$originalStopTime</code>
-      <code>$tagRequest</code>
-      <code>$tagRequest</code>
-      <code>$tagRequest</code>
-      <code>$tagRequest</code>
-      <code>$tagRequest</code>
-      <code>$tagRequest</code>
-      <code>$tagRequest</code>
+    <MixedAssignment>
+      <code><![CDATA[$originalStopTime]]></code>
+      <code><![CDATA[$tagRequest]]></code>
+      <code><![CDATA[$tagRequest]]></code>
+      <code><![CDATA[$tagRequest]]></code>
+      <code><![CDATA[$tagRequest]]></code>
+      <code><![CDATA[$tagRequest]]></code>
+      <code><![CDATA[$tagRequest]]></code>
+      <code><![CDATA[$tagRequest]]></code>
     </MixedAssignment>
-    <UnusedVariable occurrences="1">
-      <code>$block</code>
+    <UnusedVariable>
+      <code><![CDATA[$block]]></code>
     </UnusedVariable>
-  </file>
-  <file src="tests/Unit/Events/Span/SpanReferenceTest.php">
-    <MixedAssignment occurrences="1">
-      <code>$actualReturn</code>
-    </MixedAssignment>
-  </file>
-  <file src="tests/Unit/Extension/PotentiallyAvailableExtensionCapabilitiesTest.php">
-    <MixedArgument occurrences="4">
-      <code>$calls</code>
-      <code>$calls</code>
-      <code>$this-&gt;capabilities-&gt;getCalls()</code>
-      <code>$this-&gt;capabilities-&gt;getCalls()</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="3">
-      <code>$calls</code>
-      <code>$recordedCall</code>
-      <code>$version</code>
-    </MixedAssignment>
   </file>
   <file src="tests/Unit/Helper/MemoryUsageTest.php">
-    <UnusedVariable occurrences="1">
-      <code>$block</code>
+    <UnusedVariable>
+      <code><![CDATA[$block]]></code>
     </UnusedVariable>
   </file>
+  <file src="tests/Unit/Helper/TimerTest.php">
+    <DeprecatedMethod>
+      <code><![CDATA[self::assertRegExp(self::DATE_FORMAT_VALIDATION_REGEX, (string) $timer->getStart())]]></code>
+      <code><![CDATA[self::assertRegExp(self::DATE_FORMAT_VALIDATION_REGEX, (string) $timer->getStop())]]></code>
+    </DeprecatedMethod>
+  </file>
   <file src="tests/Unit/Laravel/Facades/ScoutApmTest.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>testFacadeProxiesMethodsToRealAgent</code>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[testFacadeProxiesMethodsToRealAgent]]></code>
+      <code><![CDATA[testFacadeProxiesMethodsToRealAgent]]></code>
     </PossiblyInvalidArgument>
-  </file>
-  <file src="tests/Unit/Laravel/Middleware/ActionInstrumentTest.php">
-    <UnusedClosureParam occurrences="3">
-      <code>$originalName</code>
-      <code>$originalName</code>
-      <code>$originalName</code>
-    </UnusedClosureParam>
-  </file>
-  <file src="tests/Unit/Laravel/Middleware/MiddlewareInstrumentTest.php">
-    <UnusedClosureParam occurrences="2">
-      <code>$name</code>
-      <code>$type</code>
-    </UnusedClosureParam>
   </file>
   <file src="tests/Unit/Laravel/Providers/ScoutApmServiceProviderTestBase.php">
-    <InvalidArrayOffset occurrences="1">
-      <code>$commands[1]['StartSpan']</code>
+    <DeprecatedMethod>
+      <code><![CDATA[withConsecutive]]></code>
+      <code><![CDATA[withConsecutive]]></code>
+      <code><![CDATA[withConsecutive]]></code>
+      <code><![CDATA[withConsecutive]]></code>
+      <code><![CDATA[withConsecutive]]></code>
+    </DeprecatedMethod>
+    <InvalidArrayOffset>
+      <code><![CDATA[$commands[1]['StartSpan']]]></code>
     </InvalidArrayOffset>
-    <MixedArgument occurrences="1">
-      <code>$commands[1]['StartSpan']</code>
+    <MixedArgument>
+      <code><![CDATA[$commands[1]['StartSpan']]]></code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="2">
-      <code>$commands[1]['StartSpan']['operation']</code>
-      <code>json_decode(json_encode($metadata), true)['ApplicationEvent']</code>
+    <MixedArrayAccess>
+      <code><![CDATA[$commands[1]['StartSpan']['operation']]]></code>
+      <code><![CDATA[json_decode(json_encode($metadata), true)['ApplicationEvent']]]></code>
     </MixedArrayAccess>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;application</code>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$this->application]]></code>
     </PossiblyInvalidArgument>
-    <UndefinedClass occurrences="10">
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
+    <UndefinedClass>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
     </UndefinedClass>
-    <UnusedClosureParam occurrences="1">
-      <code>$whichViews</code>
-    </UnusedClosureParam>
   </file>
   <file src="tests/Unit/Laravel/Providers/ScoutApmServiceProviderUsingLaravelTest.php">
-    <DeprecatedMethod occurrences="1">
-      <code>setMethods</code>
+    <DeprecatedMethod>
+      <code><![CDATA[setMethods]]></code>
     </DeprecatedMethod>
   </file>
   <file src="tests/Unit/Laravel/Providers/ScoutApmServiceProviderUsingLumenTest.php">
-    <DeprecatedMethod occurrences="1">
-      <code>setMethods</code>
-    </DeprecatedMethod>
-    <MixedArrayAssignment occurrences="1">
-      <code>$loadedConfigurations['cache']</code>
+    <MixedArrayAssignment>
+      <code><![CDATA[$loadedConfigurations['cache']]]></code>
     </MixedArrayAssignment>
-    <MixedAssignment occurrences="1">
-      <code>$loadedConfigurations</code>
+    <MixedAssignment>
+      <code><![CDATA[$loadedConfigurations]]></code>
     </MixedAssignment>
+  </file>
+  <file src="tests/Unit/Laravel/View/Engine/EngineImplementationWithGetCompilerMethod.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[forgetCompiledOrNotExpired]]></code>
+      <code><![CDATA[getCompiler]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$lastCompiled]]></code>
+    </PossiblyUnusedProperty>
   </file>
   <file src="tests/Unit/Laravel/View/Engine/ScoutViewEngineDecoratorTest.php">
-    <MixedArgument occurrences="1">
-      <code>BladeSourceMapCompiler::class</code>
+    <MixedArgument>
+      <code><![CDATA[BladeSourceMapCompiler::class]]></code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$vem</code>
+    <MixedAssignment>
+      <code><![CDATA[$vem]]></code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="1">
-      <code>map</code>
+    <MixedMethodCall>
+      <code><![CDATA[map]]></code>
     </MixedMethodCall>
-    <UndefinedClass occurrences="1">
-      <code>BladeSourceMapCompiler</code>
+    <UndefinedClass>
+      <code><![CDATA[BladeSourceMapCompiler]]></code>
     </UndefinedClass>
-    <UnusedClosureParam occurrences="4">
-      <code>$name</code>
-      <code>$name</code>
-      <code>$type</code>
-      <code>$type</code>
-    </UnusedClosureParam>
   </file>
   <file src="tests/Unit/ScoutApmBundle/DependencyInjection/ScoutApmExtensionTest.php">
-    <MixedArgument occurrences="1">
-      <code>$agentConfigurationArgument</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="2">
-      <code>$agentConfigurationArgument</code>
-      <code>$agentConfigurationArgument</code>
+    <MixedAssignment>
+      <code><![CDATA[$agentConfigurationArgument]]></code>
+      <code><![CDATA[$agentConfigurationArgument]]></code>
     </MixedAssignment>
+  </file>
+  <file src="tests/Unit/ScoutApmBundle/EventListener/DoctrineSqlLoggerTest.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getSQLLogger]]></code>
+      <code><![CDATA[getSQLLogger]]></code>
+      <code><![CDATA[setSQLLogger]]></code>
+    </DeprecatedMethod>
   </file>
   <file src="tests/Unit/ScoutApmBundle/ScoutApmAgentFactoryTest.php">
-    <MixedArgument occurrences="2">
-      <code>$flattenedMetadata</code>
-      <code>$flattenedMetadata</code>
+    <DeprecatedMethod>
+      <code><![CDATA[self::at(3)]]></code>
+    </DeprecatedMethod>
+    <MixedArgument>
+      <code><![CDATA[$flattenedMetadata]]></code>
+      <code><![CDATA[$flattenedMetadata]]></code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="3">
-      <code>$flattenedMetadata['framework']</code>
-      <code>$flattenedMetadata['framework_version']</code>
-      <code>json_decode(json_encode($metadata), true)['ApplicationEvent']</code>
+    <MixedArrayAccess>
+      <code><![CDATA[$flattenedMetadata['framework']]]></code>
+      <code><![CDATA[$flattenedMetadata['framework_version']]]></code>
+      <code><![CDATA[json_decode(json_encode($metadata), true)['ApplicationEvent']]]></code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="1">
-      <code>$flattenedMetadata</code>
+    <MixedAssignment>
+      <code><![CDATA[$flattenedMetadata]]></code>
     </MixedAssignment>
   </file>
+  <file src="tests/Unit/ScoutApmBundle/ScoutApmBundleTest.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getSQLLogger]]></code>
+      <code><![CDATA[withConsecutive]]></code>
+      <code><![CDATA[withConsecutive]]></code>
+      <code><![CDATA[withConsecutive]]></code>
+    </DeprecatedMethod>
+  </file>
   <file src="tests/Unit/ScoutApmBundle/Twig/TwigDecoratorTest.php">
-    <UnusedClosureParam occurrences="8">
-      <code>$name</code>
-      <code>$name</code>
-      <code>$name</code>
-      <code>$name</code>
-      <code>$type</code>
-      <code>$type</code>
-      <code>$type</code>
-      <code>$type</code>
-    </UnusedClosureParam>
+    <RedundantCondition>
+      <code><![CDATA[$returnType !== null]]></code>
+      <code><![CDATA[assert($returnType !== null)]]></code>
+    </RedundantCondition>
+  </file>
+  <file src="tests/Unit/TestLogger.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$regex]]></code>
+    </ArgumentTypeCoercion>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[hasRecord]]></code>
+      <code><![CDATA[hasRecordThatContains]]></code>
+      <code><![CDATA[hasRecordThatMatches]]></code>
+      <code><![CDATA[hasRecords]]></code>
+      <code><![CDATA[reset]]></code>
+    </PossiblyUnusedMethod>
   </file>
 </files>

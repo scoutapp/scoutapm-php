@@ -24,6 +24,7 @@ final class ConsoleListenerTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+
         $this->agent = $this->createMock(ScoutApmAgent::class);
 
         $this->consoleListener = new ConsoleListener($this->agent, ['--foo', 'bar']);

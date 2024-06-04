@@ -235,8 +235,9 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           coverage: "none"
-          php-version: "7.2"
-          tools: composer:v2.3
+          php-version: "7.4"
+          extensions: mongodb
+          tools: composer:v2.6
         env:
           fail-fast: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -254,15 +255,16 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           coverage: "none"
-          php-version: "7.2"
-          tools: composer:v2.3
+          php-version: "7.4"
+          extensions: mongodb
+          tools: composer:v2.6
         env:
           fail-fast: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "Install dependencies"
         run: "composer install --no-interaction --prefer-dist"
       - name: "Run Psalm"
-        run: "vendor/bin/psalm"
+        run: "vendor/bin/psalm --no-cache --threads=1"
 
   roave-backwards-compatibility-check:
     name: "Check for Backward Compatibility breaks"
