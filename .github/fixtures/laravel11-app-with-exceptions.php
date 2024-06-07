@@ -15,6 +15,6 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->reportable(function (Throwable $e) {
-            $this->container->make(\Scoutapm\ScoutApmAgent::class)->recordThrowable($e);
+            app()->make(\Scoutapm\ScoutApmAgent::class)->recordThrowable($e);
         });
     })->create();
