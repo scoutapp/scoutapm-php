@@ -117,7 +117,7 @@ jobs:
       SCOUT_APM_KEY: ${{ secrets.SCOUT_APM_KEY }}
     steps:
       - uses: actions/checkout@v4
-      - uses: Vampire/setup-wsl@v2
+      - uses: Vampire/setup-wsl@v3
         if: ${{ matrix.os == 'windows-latest' }}
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
