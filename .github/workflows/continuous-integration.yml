@@ -536,9 +536,12 @@ jobs:
       - name: "Configure error handler (Laravel 8)"
         if: matrix.laravel-version == '8.*'
         run: cd test-app && cp ../scout-apm-php/.github/fixtures/laravel8-exception-handler.php app/Exceptions/Handler.php
-      - name: "Configure error handler (Laravel 9)"
+      - name: "Configure error handler (Laravel 9-10)"
         if: matrix.laravel-version == '9.*' || matrix.laravel-version == '10.*'
         run: cd test-app && cp ../scout-apm-php/.github/fixtures/laravel9-exception-handler.php app/Exceptions/Handler.php
+      - name: "Configure error handler (Laravel 11)"
+        if: matrix.laravel-version == '11.*'
+        run: cd test-app && cp ../scout-apm-php/.github/fixtures/laravel11-app-with-exceptions.php bootstrap/app.php
       - name: "Add route to trigger error"
         run: cd test-app && echo -e "Route::get('/e', function () { throw new \RuntimeException('fail'); });" >> routes/web.php
       - name: "Configure Scout"
