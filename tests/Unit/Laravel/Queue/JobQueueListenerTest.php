@@ -23,6 +23,7 @@ final class JobQueueListenerTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+
         $this->agent = $this->createMock(ScoutApmAgent::class);
 
         $this->jobQueueListener = new JobQueueListener($this->agent);

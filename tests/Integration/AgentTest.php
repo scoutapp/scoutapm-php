@@ -40,6 +40,7 @@ use function meminfo_dump;
 use function memory_get_usage;
 use function next;
 use function reset;
+use function scoutapm_list_instrumented_functions;
 use function shell_exec;
 use function sleep;
 use function sprintf;

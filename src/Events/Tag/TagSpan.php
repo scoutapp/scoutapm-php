@@ -27,6 +27,7 @@ class TagSpan extends Tag
     public function __construct(string $tag, $value, RequestId $requestId, SpanId $spanId, ?float $timestamp = null)
     {
         parent::__construct($tag, $value, $requestId, $timestamp);
+
         $this->spanId = $spanId;
     }
 

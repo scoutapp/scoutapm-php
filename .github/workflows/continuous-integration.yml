@@ -60,7 +60,7 @@ jobs:
     env:
       SCOUT_APM_KEY: ${{ secrets.SCOUT_APM_KEY }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
@@ -116,8 +116,8 @@ jobs:
     env:
       SCOUT_APM_KEY: ${{ secrets.SCOUT_APM_KEY }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: Vampire/setup-wsl@v2
+      - uses: actions/checkout@v4
+      - uses: Vampire/setup-wsl@v3
         if: ${{ matrix.os == 'windows-latest' }}
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
@@ -195,7 +195,7 @@ jobs:
     env:
       SCOUT_APM_KEY: ${{ secrets.SCOUT_APM_KEY }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
@@ -230,13 +230,14 @@ jobs:
     name: "Check coding standards"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
           coverage: "none"
-          php-version: "7.2"
-          tools: composer:v2.3
+          php-version: "7.4"
+          extensions: mongodb
+          tools: composer:v2.6
         env:
           fail-fast: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -249,26 +250,27 @@ jobs:
     name: "Perform static analysis"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
           coverage: "none"
-          php-version: "7.2"
-          tools: composer:v2.3
+          php-version: "7.4"
+          extensions: mongodb
+          tools: composer:v2.6
         env:
           fail-fast: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "Install dependencies"
         run: "composer install --no-interaction --prefer-dist"
       - name: "Run Psalm"
-        run: "vendor/bin/psalm"
+        run: "vendor/bin/psalm --no-cache --threads=1"
 
   roave-backwards-compatibility-check:
     name: "Check for Backward Compatibility breaks"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: "Install PHP"
@@ -318,7 +320,7 @@ jobs:
           - { symfony-version: "6.*", php-version: "7.3" } # Symfony 6 requires 8.0+
           - { symfony-version: "6.*", php-version: "7.4" } # Symfony 6 requires 8.0+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
@@ -359,6 +361,7 @@ jobs:
           - "8.*"
           - "9.*"
           - "10.*"
+          - "11.*"
         php-version:
           - "7.2"
           - "7.3"
@@ -366,9 +369,9 @@ jobs:
           - "8.0"
           - "8.1"
           - "8.2"
-          - "8.3" # @todo confirm which versions of Laravel will support PHP 8.3
+          - "8.3"
         exclude:
-          # See - https://laravel.com/docs/9.x/releases#support-policy
+          # See - https://laravel.com/docs/11.x/releases#support-policy
           # See - https://github.com/laravel/framework/issues/40339
           # Laravel 5.5 supports PHP 7.1 - 7.4
           - {laravel-version: "5.5.*", php-version: "8.0"} # Laravel 5.5.* does not support PHP 8.0+
@@ -392,13 +395,19 @@ jobs:
           - {laravel-version: "9.*", php-version: "7.3"} # Laravel 9 requires 8.0+
           - {laravel-version: "9.*", php-version: "7.4"} # Laravel 9 requires 8.0+
           - {laravel-version: "9.*", php-version: "8.3"} # Laravel 9 does not support PHP 8.3+
-          # Laravel 10 supports PHP 8.1 - 8.2 @todo tbc
+          # Laravel 10 supports PHP 8.1 - 8.3
           - {laravel-version: "10.*", php-version: "7.2"} # Laravel 10 requires 8.1+
           - {laravel-version: "10.*", php-version: "7.3"} # Laravel 10 requires 8.1+
           - {laravel-version: "10.*", php-version: "7.4"} # Laravel 10 requires 8.1+
           - {laravel-version: "10.*", php-version: "8.0"} # Laravel 10 requires 8.1+
+          # Laravel 11 supports PHP 8.2 - 8.3
+          - {laravel-version: "11.*", php-version: "7.2"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "7.3"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "7.4"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "8.0"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "8.1"} # Laravel 11 requires 8.2+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
@@ -419,7 +428,7 @@ jobs:
         if: ${{ (matrix.php-version == '8.0' || matrix.php-version == '8.1') && (matrix.laravel-version == '8.*' || matrix.laravel-version == '9.*') }}
         run: "composer require --dev spatie/laravel-ignition:^1.6 --no-update --no-interaction"
       - name: "Install spatie/laravel-ignition ^2.0 (if available)"
-        if: ${{ (matrix.php-version == '8.1' || matrix.php-version == '8.2' || matrix.php-version == '8.3') && (matrix.laravel-version == '10.*') }}
+        if: ${{ (matrix.php-version == '8.1' || matrix.php-version == '8.2' || matrix.php-version == '8.3') && (matrix.laravel-version == '10.*' || matrix.laravel-version == '11.*') }}
         run: "composer require --dev spatie/laravel-ignition:^2.0 --no-update --no-interaction"
       - name: "Unrestrict nesbot/carbon for older PHP versions"
         if: ${{ (matrix.php-version == '7.2' || matrix.php-version == '7.3' || matrix.php-version == '7.4' || matrix.php-version == '8.0' || matrix.php-version == '8.1') }}
@@ -445,6 +454,7 @@ jobs:
           - "8.*"
           - "9.*"
           - "10.*"
+          - "11.*"
         php-version:
           - "7.2"
           - "7.3"
@@ -452,9 +462,9 @@ jobs:
           - "8.0"
           - "8.1"
           - "8.2"
-          - "8.3" # @todo confirm which versions of Laravel will support PHP 8.3
+          - "8.3"
         exclude:
-          # See - https://laravel.com/docs/9.x/releases#support-policy
+          # See - https://laravel.com/docs/11.x/releases#support-policy
           # See - https://github.com/laravel/framework/issues/40339
           # Laravel 5.5 supports PHP 7.1 - 7.4
           - {laravel-version: "5.5.*", php-version: "8.0"} # Laravel 5.5.* does not support PHP 8.0+
@@ -478,15 +488,21 @@ jobs:
           - {laravel-version: "9.*", php-version: "7.3"} # Laravel 9 requires 8.0+
           - {laravel-version: "9.*", php-version: "7.4"} # Laravel 9 requires 8.0+
           - {laravel-version: "9.*", php-version: "8.3"} # Laravel 9 does not support PHP 8.3+
-          # Laravel 10 supports PHP 8.1 - 8.2 @todo tbc
+          # Laravel 10 supports PHP 8.1 - 8.3
           - {laravel-version: "10.*", php-version: "7.2"} # Laravel 10 requires 8.1+
           - {laravel-version: "10.*", php-version: "7.3"} # Laravel 10 requires 8.1+
           - {laravel-version: "10.*", php-version: "7.4"} # Laravel 10 requires 8.1+
           - {laravel-version: "10.*", php-version: "8.0"} # Laravel 10 requires 8.1+
+          # Laravel 11 supports PHP 8.2 - 8.3
+          - {laravel-version: "11.*", php-version: "7.2"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "7.3"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "7.4"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "8.0"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "8.1"} # Laravel 11 requires 8.2+
     env:
       SCOUT_APM_KEY: ${{ secrets.SCOUT_APM_KEY }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           path: scout-apm-php
       - name: "Install PHP"
@@ -520,9 +536,12 @@ jobs:
       - name: "Configure error handler (Laravel 8)"
         if: matrix.laravel-version == '8.*'
         run: cd test-app && cp ../scout-apm-php/.github/fixtures/laravel8-exception-handler.php app/Exceptions/Handler.php
-      - name: "Configure error handler (Laravel 9)"
+      - name: "Configure error handler (Laravel 9-10)"
         if: matrix.laravel-version == '9.*' || matrix.laravel-version == '10.*'
         run: cd test-app && cp ../scout-apm-php/.github/fixtures/laravel9-exception-handler.php app/Exceptions/Handler.php
+      - name: "Configure error handler (Laravel 11)"
+        if: matrix.laravel-version == '11.*'
+        run: cd test-app && cp ../scout-apm-php/.github/fixtures/laravel11-app-with-exceptions.php bootstrap/app.php
       - name: "Add route to trigger error"
         run: cd test-app && echo -e "Route::get('/e', function () { throw new \RuntimeException('fail'); });" >> routes/web.php
       - name: "Configure Scout"
@@ -572,6 +591,7 @@ jobs:
           - "8.*"
           - "9.*"
           - "10.*"
+          - "11.*"
         php-version:
           - "7.2"
           - "7.3"
@@ -579,9 +599,9 @@ jobs:
           - "8.0"
           - "8.1"
           - "8.2"
-          - "8.3" # @todo confirm which versions of Laravel will support PHP 8.2
+          - "8.3"
         exclude:
-          # See - https://laravel.com/docs/9.x/releases#support-policy
+          # See - https://laravel.com/docs/11.x/releases#support-policy
           # See - https://github.com/laravel/framework/issues/40339
           # Laravel 5.5 supports PHP 7.1 - 7.4
           - {laravel-version: "5.5.*", php-version: "8.0"} # Laravel 5.5.* does not support PHP 8.0+
@@ -605,15 +625,21 @@ jobs:
           - {laravel-version: "9.*", php-version: "7.3"} # Laravel 9 requires 8.0+
           - {laravel-version: "9.*", php-version: "7.4"} # Laravel 9 requires 8.0+
           - {laravel-version: "9.*", php-version: "8.3"} # Laravel 9 does not support PHP 8.3+
-          # Laravel 10 supports PHP 8.1 - 8.2 @todo tbc
+          # Laravel 10 supports PHP 8.1 - 8.3
           - {laravel-version: "10.*", php-version: "7.2"} # Laravel 10 requires 8.1+
           - {laravel-version: "10.*", php-version: "7.3"} # Laravel 10 requires 8.1+
           - {laravel-version: "10.*", php-version: "7.4"} # Laravel 10 requires 8.1+
           - {laravel-version: "10.*", php-version: "8.0"} # Laravel 10 requires 8.1+
+          # Laravel 11 supports PHP 8.2 - 8.3
+          - {laravel-version: "11.*", php-version: "7.2"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "7.3"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "7.4"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "8.0"} # Laravel 11 requires 8.2+
+          - {laravel-version: "11.*", php-version: "8.1"} # Laravel 11 requires 8.2+
     env:
       SCOUT_APM_KEY: ${{ secrets.SCOUT_APM_KEY }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           path: scout-apm-php
       - name: "Install PHP"
@@ -677,7 +703,7 @@ jobs:
           - "8.0"
           - "8.1"
           - "8.2"
-          - "8.3" # @todo confirm which versions of Laravel will support PHP 8.2
+          - "8.3"
         exclude:
           # Lumen 5.5 supports PHP 7.1 - 7.3
           - {lumen-version: "5.5.*", php-version: "7.4"} # Lumen 5.5 does not support PHP 7.4+
@@ -704,13 +730,13 @@ jobs:
           - {lumen-version: "9.*", php-version: "7.3"} # Lumen 9 requires 8.0+
           - {lumen-version: "9.*", php-version: "7.4"} # Lumen 9 requires 8.0+
           - {lumen-version: "9.*", php-version: "8.3"} # Lumen 9 does not support PHP 8.3+
-          # Lumen 10 supports PHP 8.1 - 8.2 @todo tbc
+          # Lumen 10 supports PHP 8.1 - 8.3
           - {lumen-version: "10.*", php-version: "7.2"} # Lumen 10 requires 8.1+
           - {lumen-version: "10.*", php-version: "7.3"} # Lumen 10 requires 8.1+
           - {lumen-version: "10.*", php-version: "7.4"} # Lumen 10 requires 8.1+
           - {lumen-version: "10.*", php-version: "8.0"} # Lumen 10 requires 8.1+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
@@ -758,7 +784,7 @@ jobs:
           - "8.0"
           - "8.1"
           - "8.2"
-          - "8.3" # @todo confirm which versions of Laravel will support PHP 8.2
+          - "8.3"
         exclude:
           # Lumen 5.5 supports PHP 7.1 - 7.3
           - {lumen-version: "5.5.*", php-version: "7.4"} # Lumen 5.5 does not support PHP 7.4+
@@ -785,7 +811,7 @@ jobs:
           - {lumen-version: "9.*", php-version: "7.3"} # Lumen 9 requires 8.0+
           - {lumen-version: "9.*", php-version: "7.4"} # Lumen 9 requires 8.0+
           - {lumen-version: "9.*", php-version: "8.3"} # Lumen 9 does not support PHP 8.3+
-          # Lumen 10 supports PHP 8.1 - 8.2 @todo tbc
+          # Lumen 10 supports PHP 8.1 - 8.3
           - {lumen-version: "10.*", php-version: "7.2"} # Lumen 10 requires 8.1+
           - {lumen-version: "10.*", php-version: "7.3"} # Lumen 10 requires 8.1+
           - {lumen-version: "10.*", php-version: "7.4"} # Lumen 10 requires 8.1+
@@ -795,7 +821,7 @@ jobs:
     steps:
       - name: "Skip if SCOUT_APM_KEY secret is not available"
         run: echo 'This job is skipped entirely as it needs SCOUT_APM_KEY set in secrets.'
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           path: scout-apm-php
       - name: "Install PHP"

@@ -1,6 +1,6 @@
 .PHONY: *
 
-PHP_VERSION=7.2
+PHP_VERSION=7.4
 PHP_PATH=/usr/bin/env php$(PHP_VERSION)
 COMPOSER_PATH=/usr/local/bin/composer
 OPTS=
@@ -20,7 +20,7 @@ cs-fix: ## auto fix code style rules
 	$(PHP_PATH) vendor/bin/phpcbf $(OPTS)
 
 static-analysis: ## verify that no new static analysis issues were introduced
-	$(PHP_PATH) vendor/bin/psalm $(OPTS)
+	$(PHP_PATH) vendor/bin/psalm --threads=1 $(OPTS)
 
 coverage: ## generate code coverage reports
 	$(PHP_PATH) vendor/bin/phpunit --testsuite unit --coverage-html build/coverage-html --coverage-text $(OPTS)
@@ -41,7 +41,7 @@ deps-highest: ## Update deps to highest
 	$(PHP_PATH) $(COMPOSER_PATH) install
 
 update-static-analysis-baseline: ## bump static analysis baseline issues, reducing set of allowed failures
-	$(PHP_PATH) vendor/bin/psalm --update-baseline
+	$(PHP_PATH) vendor/bin/psalm --update-baseline --threads=1
 
 reset-static-analysis-baseline: ## reset static analysis baseline issues to current HEAD
-	$(PHP_PATH) vendor/bin/psalm --set-baseline=known-issues.xml
+	$(PHP_PATH) vendor/bin/psalm --set-baseline=known-issues.xml --threads=1

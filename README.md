@@ -1,6 +1,6 @@
 # Scout PHP APM Agent
 
-[![Build](https://github.com/scoutapp/scout-apm-php/workflows/Build/badge.svg?branch=master&event=push)](https://github.com/scoutapp/scout-apm-php/actions?query=branch%3Amaster) [![Latest Stable Version](https://poser.pugx.org/scoutapp/scout-apm-php/v/stable)](https://packagist.org/packages/scoutapp/scout-apm-php) [![Total Downloads](https://poser.pugx.org/scoutapp/scout-apm-php/downloads)](https://packagist.org/packages/scoutapp/scout-apm-php) [![License](https://poser.pugx.org/scoutapp/scout-apm-php/license)](https://packagist.org/packages/scoutapp/scout-apm-php)
+[![Build](https://github.com/scoutapp/scout-apm-php/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/scoutapp/scout-apm-php/actions/workflows/continuous-integration.yml) [![Latest Stable Version](https://poser.pugx.org/scoutapp/scout-apm-php/v/stable)](https://packagist.org/packages/scoutapp/scout-apm-php) [![Total Downloads](https://poser.pugx.org/scoutapp/scout-apm-php/downloads)](https://packagist.org/packages/scoutapp/scout-apm-php) [![License](https://poser.pugx.org/scoutapp/scout-apm-php/license)](https://packagist.org/packages/scoutapp/scout-apm-php)
 
 Email us at support@ScoutAPM.com to get on the beta invite list!
 
